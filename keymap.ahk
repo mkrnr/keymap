@@ -1,0 +1,153 @@
+#Include, %A_ScriptDir%\virtual-desktop-enhancer.ahk
+
+#Persistent
+SetCapsLockState, AlwaysOff
+
+Capslock::Esc
+Capslock & h::Left
+Capslock & j::Down
+Capslock & k::Up
+Capslock & l::Right
+
+#e::Run explorer.exe
+#Enter::Run C:\data\nextcloud\technical\startTerminal.vbs
+#b::Run C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+
+#v::Run Spotify.exe
+#IfWinActive, ahk_class Chrome_WidgetWin_0
+    #v::
+        PostMessage, 0x112, 0xF060,,, A
+        Send {Alt down}{Tab}{Alt up}
+#IfWinActive
+
+Capslock & 1::F1
+Capslock & 2::F2
+Capslock & 3::F3
+Capslock & 4::F4
+Capslock & 5::F5
+Capslock & 6::F6
+Capslock & 7::F7
+Capslock & 8::F8
+Capslock & 9::F9
+Capslock & 0::F10
+Capslock & -::F11
+Capslock & =::F12
+
+#u::
+Capslock & u::SwitchToDesktop(1)
+#i::
+Capslock & i::SwitchToDesktop(2)
+#o::
+Capslock & o::SwitchToDesktop(3)
+#p::
+Capslock & p::SwitchToDesktop(4)
+#[::
+Capslock & [::SwitchToDesktop(5)
+#n::
+Capslock & n::SwitchToDesktop(6)
+#m::
+Capslock & m::SwitchToDesktop(7)
+#,::
+Capslock & ,::SwitchToDesktop(8)
+#.::
+Capslock & .::SwitchToDesktop(9)
+#/::
+Capslock & /::SwitchToDesktop(10)
+
++#u::MoveAndSwitchToDesktop(1)
++#i::MoveAndSwitchToDesktop(2)
++#o::MoveAndSwitchToDesktop(3)
++#p::MoveAndSwitchToDesktop(4)
++#[::MoveAndSwitchToDesktop(5)
++#n::MoveAndSwitchToDesktop(6)
++#m::MoveAndSwitchToDesktop(7)
++#,::MoveAndSwitchToDesktop(8)
++#.::MoveAndSwitchToDesktop(9)
++#/::MoveAndSwitchToDesktop(10)
+
+#if getkeystate("lwin")
+    h::left
+    k::up
+    j::down
+    l::right
+#if
+
+Capslock & d::ShiftAltTab
+LWin & d::ShiftAltTab
+Capslock & f::AltTab
+LWin & f::AltTab
+
+RAlt & p::
+    ShiftState := GetKeyState("Shift", "P")
+    If (ShiftState) {
+        Send {Ö}
+    } Else {
+        Send {ö}
+    }
+    return
+
+RAlt & 5::SendInput {Text}€
+
+RAlt & q::
+    ShiftState := GetKeyState("Shift", "P")
+    If (ShiftState) {
+        Send {Ä}
+    } Else {
+        Send {ä}
+    }
+    return
+
+RAlt & y::
+    ShiftState := GetKeyState("Shift", "P")
+    If (ShiftState) {
+        Send {Ü}
+    } Else {
+        Send {ü}
+    }
+    return
+
+RAlt & s::Send {ß}
+
+#c::PostMessage, 0x112, 0xF060,,, A
+
+RAlt & c::Send {Control Down}{Insert}{Control Up}
+RAlt & v::Send {Shift Down}{Insert}{Shift Up}
+
+#q::WinGetClass, Clipboard, A
+
+#IfWinActive, ahk_class SWT_Window0
+    Capslock & s::
+#IfWinActive, ahk_class #32770
+    Capslock & s::
+        if(!GetKeyState("LControl"))
+            Send {LControl Down}
+        if(!GetKeyState("LShift"))
+            Send {LShift Down}
+        Send {F7}
+        SetTimer, WaitForCapslockUp, 100
+        return
+#IfWinActive
+
+#IfWinActive, ahk_class SWT_Window0
+    Capslock & g::
+#IfWinActive, ahk_class #32770
+    Capslock & g::
+        if(!GetKeyState("LControl"))
+            Send {LControl Down}
+        if(GetKeyState("LShift"))
+            Send {LShift Up}
+        Send {F7}
+        SetTimer, WaitForCapslockUp, 100
+        return
+#IfWinActive
+
+WaitForCapslockUp:
+    if(!GetKeyState("Capslock", "P")){
+        Send {LControl Up}
+        Send {LShift Up}
+        SetTimer, WaitForCapslockUp, Off
+    }
+    return
+
+Capslock & s::^+Tab
+Capslock & g::^Tab
