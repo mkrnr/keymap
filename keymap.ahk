@@ -10,7 +10,7 @@ Capslock & k::Up
 Capslock & l::Right
 
 #e::Run explorer.exe
-#Enter::Run C:\data\nextcloud\technical\startTerminal.vbs
+#Enter::Run C:\my-programs\wsl-terminal\wsl-terminal
 #b::Run C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
 
 #v::Run Spotify.exe
@@ -77,32 +77,33 @@ LWin & d::ShiftAltTab
 Capslock & f::AltTab
 LWin & f::AltTab
 
-RAlt & p::
+RAlt & o::
     ShiftState := GetKeyState("Shift", "P")
     If (ShiftState) {
-        Send {Ö}
+        Send, {Ö}
     } Else {
-        Send {ö}
+        Send, {ö}
     }
     return
 
 RAlt & 5::SendInput {Text}€
 
-RAlt & q::
+RAlt & a::
     ShiftState := GetKeyState("Shift", "P")
     If (ShiftState) {
-        Send {Ä}
+        Send, {Ä}
     } Else {
-        Send {ä}
+        Send, {ä}
     }
     return
 
-RAlt & y::
+
+RAlt & u::
     ShiftState := GetKeyState("Shift", "P")
     If (ShiftState) {
-        Send {Ü}
+        Send, {Ü}
     } Else {
-        Send {ü}
+        Send, {ü}
     }
     return
 
@@ -151,3 +152,36 @@ WaitForCapslockUp:
 
 Capslock & s::^+Tab
 Capslock & g::^Tab
+
+
+
+;OneNote, from: https://www.reddit.com/r/OneNote/comments/4jxy3j
+SetTitleMatchMode, 2
+
+winTitlePart := "- OneNote"
+onenotem := "Send To OneNote"
+
+#r::
+IfWinNotExist, %onenotem%
+{
+    Run "C:\Program Files (x86)\Microsoft Office\root\Office16\ONENOTEM.EXE" /tsr,, hide
+    Send, #!n
+}
+else {
+    Send, #!n
+}
+return
+
+#t::
+IfWinExist, %winTitlePart%
+{
+        IfWinNotActive, %winTitlePart%
+                WinActivate, %winTitlePart%
+}
+else {
+    IfWinNotActive, %winTitlePart%
+        Run, "C:\Program Files (x86)\Microsoft Office\root\Office16\ONENOTE.EXE"
+
+}
+SetTitleMatchMode, 1
+return
