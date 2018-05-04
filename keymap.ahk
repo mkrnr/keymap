@@ -3,6 +3,10 @@
 #Persistent
 SetCapsLockState, AlwaysOff
 
+
+
+
+
 Capslock::Esc
 Capslock & h::Left
 Capslock & j::Down
@@ -10,7 +14,7 @@ Capslock & k::Up
 Capslock & l::Right
 
 #e::Run explorer.exe
-#Enter::Run C:\my-programs\wsl-terminal\wsl-terminal
+#Enter::Run C:\source\wsl-terminal\open-wsl.exe
 #b::Run C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
 
 #v::Run Spotify.exe
@@ -116,23 +120,24 @@ RAlt & v::Send {Shift Down}{Insert}{Shift Up}
 
 #q::WinGetClass, Clipboard, A
 
+;eclipse 
 #IfWinActive, ahk_class SWT_Window0
-    Capslock & s::
-#IfWinActive, ahk_class #32770
-    Capslock & s::
-        if(!GetKeyState("LControl"))
-            Send {LControl Down}
-        if(!GetKeyState("LShift"))
-            Send {LShift Down}
-        Send {F7}
-        SetTimer, WaitForCapslockUp, 100
-        return
-#IfWinActive
+	Capslock & s::^PgUp
+	Capslock & g::^PgDn
+
+	Capslock & e::^e
+	Capslock & r::+^r
+	Capslock & t::+^t
+	Capslock & c::!^h
+	Capslock & x::^1
+	Capslock & Space::^Space
+
+
 
 #IfWinActive, ahk_class SWT_Window0
-    Capslock & g::
+    Capslock & v::
 #IfWinActive, ahk_class #32770
-    Capslock & g::
+    Capslock & v::
         if(!GetKeyState("LControl"))
             Send {LControl Down}
         if(GetKeyState("LShift"))
