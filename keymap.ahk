@@ -16,6 +16,7 @@ Capslock & l::Right
 #e::Run explorer.exe
 #Enter::Run C:\source\wsl-terminal\open-wsl.exe
 #b::Run C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+#s::Run, explore D:\eclipse-shortcuts
 
 #v::Run Spotify.exe
 #IfWinActive, ahk_class Chrome_WidgetWin_0
@@ -125,6 +126,7 @@ RAlt & v::Send {Shift Down}{Insert}{Shift Up}
 	Capslock & s::^PgUp
 	Capslock & g::^PgDn
 
+	Capslock & w::^w
 	Capslock & e::^e
 	Capslock & r::+^r
 	Capslock & t::+^t
