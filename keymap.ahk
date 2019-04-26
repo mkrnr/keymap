@@ -16,7 +16,8 @@ Capslock & l::Right
 #e::Run explorer.exe
 #Enter::Run C:\source\wsl-terminal\open-wsl.exe
 #b::Run C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
-#s::Run, explore D:\eclipse-shortcuts
+
+#s::Run, launcher.exe, C:\source\launcher, Hide
 
 #v::Run Spotify.exe
 #IfWinActive, ahk_class Chrome_WidgetWin_0
@@ -70,10 +71,11 @@ Capslock & /::SwitchToDesktop(10)
 +#.::MoveAndSwitchToDesktop(9)
 +#/::MoveAndSwitchToDesktop(10)
 
+
 #if getkeystate("lwin")
     h::left
-    k::up
     j::down
+    k::up
     l::right
 #if
 
