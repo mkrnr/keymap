@@ -14,7 +14,7 @@ Capslock & k::Up
 Capslock & l::Right
 
 #e::Run explorer.exe
-#Enter::Run C:\source\wsl-terminal\open-wsl.exe
+#Enter::Run, %LOCALAPPDATA%\Microsoft\WindowsApps\wt.exe, C:\source\windows-terminal\home
 #b::Run C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
 
 #s::Run, launcher.exe, C:\source\launcher, Hide
@@ -26,18 +26,15 @@ Capslock & l::Right
         Send {Alt down}{Tab}{Alt up}
 #IfWinActive
 
-Capslock & 1::F1
-Capslock & 2::F2
-Capslock & 3::F3
-Capslock & 4::F4
-Capslock & 5::F5
-Capslock & 6::F6
-Capslock & 7::F7
-Capslock & 8::F8
-Capslock & 9::F9
-Capslock & 0::F10
-Capslock & -::F11
-Capslock & =::F12
+Capslock & 1::#1
+Capslock & 2::#2
+Capslock & 3::#3
+Capslock & 4::#4
+Capslock & 5::#5
+Capslock & 6::#6
+Capslock & 7::#7
+Capslock & 8::#8
+Capslock & 9::#9
 
 #u::
 Capslock & u::SwitchToDesktop(1)
