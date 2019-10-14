@@ -15,7 +15,13 @@ Capslock & l::Right
 
 #e::Run explorer.exe
 #Enter::Run, %LOCALAPPDATA%\Microsoft\WindowsApps\wt.exe, C:\source\windows-terminal\home
-#b::Run C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+
+#b::
+Send ^a
+Send ^c
+Send ^+{Home}
+Run python C:\git\stenoscores\stenoscores\score_writer.py C:\data\Dropbox\personal\stenography\progress\stats
+return
 
 #s::Run, launcher.exe, C:\source\launcher, Hide
 
