@@ -17,9 +17,17 @@ Capslock & l::Right
 #Enter::Run, %LOCALAPPDATA%\Microsoft\WindowsApps\wt.exe, C:\source\windows-terminal\home
 
 #b::
+Send Esc
+Sleep, 100
 Send ^a
+Sleep, 100
 Send ^c
+Sleep, 100
 Send ^+{Home}
+Sleep, 100
+Send f
+Sleep, 100
+Send s
 Run python C:\git\stenoscores\stenoscores\score_writer.py C:\data\Dropbox\personal\stenography\progress\stats
 return
 
