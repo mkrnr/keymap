@@ -2,10 +2,7 @@
 
 #Persistent
 SetCapsLockState, AlwaysOff
-
-
-
-
+SetTitleMatchMode, Regex
 
 Capslock::Esc
 Capslock & h::Left
@@ -13,21 +10,23 @@ Capslock & j::Down
 Capslock & k::Up
 Capslock & l::Right
 
++#r::Run C:\git\dotfiles\windows\plover\reconnect.ahk
+
+
 #e::Run explorer.exe
 #Enter::Run, %LOCALAPPDATA%\Microsoft\WindowsApps\wt.exe, C:\source\windows-terminal\home
 
 #b::
-Send Esc
-Sleep, 100
 Send ^a
 Sleep, 100
 Send ^c
 Sleep, 100
-Send ^+{Home}
-Sleep, 100
 Send f
 Sleep, 100
 Send s
+Sleep, 500
+click, 1280, 250
+MouseMove, 1280, 720
 Run python C:\git\stenoscores\stenoscores\score_writer.py C:\data\Dropbox\personal\stenography\progress\stats
 return
 
@@ -146,8 +145,42 @@ RAlt & v::Send {Shift Down}{Insert}{Shift Up}
 	Capslock & c::!^h
 	Capslock & x::^1
 	Capslock & Space::^Space
+	
+	;this also requires a remapping in the NVIM config such as nnoremap <A-1> 1gt
+	^1::vimToTab(1)
+	^2::vimToTab(2)
+	^3::vimToTab(3)
+	^4::vimToTab(4)
+	^5::vimToTab(5)
+	^6::vimToTab(6)
+	^7::vimToTab(7)
+	^8::vimToTab(8)
+	^9::vimToTab(9)
+	^0::vimToTab(0)
 
+#IfWinActive, .* - NVIM
+	Capslock & s::^PgUp
+	Capslock & g::^PgDn
+	
+	;this also requires a remapping in the NVIM config such as nnoremap <A-1> 1gt
+	^1::vimToTab(1)
+	^2::vimToTab(2)
+	^3::vimToTab(3)
+	^4::vimToTab(4)
+	^5::vimToTab(5)
+	^6::vimToTab(6)
+	^7::vimToTab(7)
+	^8::vimToTab(8)
+	^9::vimToTab(9)
+	^0::vimToTab(0)
+	
+	
 
+vimToTab(tabNumber){
+	send {Alt Down}
+	send % tabNumber
+	send {Alt Up}
+}
 
 #IfWinActive, ahk_class SWT_Window0
     Capslock & v::
