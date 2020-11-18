@@ -10,25 +10,33 @@ Capslock & j::Down
 Capslock & k::Up
 Capslock & l::Right
 
-+#r::Run C:\git\dotfiles\windows\plover\reconnect.ahk
+Capslock & q::Delete
+Capslock & z::Tab
+
+
+Capslock & y::Run C:\Windows\System32\DisplaySwitch.exe
+
+
+#y::Run C:\git\dotfiles\windows\plover\reconnect.ahk
+#z::Run C:\git\dotfiles\windows\plover\stenojig-focus.ahk
 
 
 #e::Run explorer.exe
 #Enter::Run, %LOCALAPPDATA%\Microsoft\WindowsApps\wt.exe, C:\source\windows-terminal\home
 
 #b::
-Send ^a
-Sleep, 100
-Send ^c
-Sleep, 100
-Send f
-Sleep, 100
-Send s
-Sleep, 500
-click, 1280, 250
-MouseMove, 1280, 720
-Run python C:\git\stenoscores\stenoscores\score_writer.py C:\data\Dropbox\personal\stenography\progress\stats
-return
+	Sleep, 100
+	Send ^a
+	Sleep, 200
+	Send ^c
+	Sleep, 200
+	Send f
+	Sleep, 200
+	Send s
+	Sleep, 500
+	Run C:\git\dotfiles\windows\plover\stenojig-focus.ahk
+	Run python C:\git\stenoscores\stenoscores\score_writer.py C:\data\Dropbox\personal\stenography\progress\stats
+	return
 
 #s::Run, launcher.exe, C:\source\launcher, Hide
 
@@ -38,6 +46,7 @@ return
         PostMessage, 0x112, 0xF060,,, A
         Send {Alt down}{Tab}{Alt up}
 #IfWinActive
+
 
 Capslock & 1::#1
 Capslock & 2::#2
@@ -94,49 +103,17 @@ LWin & d::ShiftAltTab
 Capslock & f::AltTab
 LWin & f::AltTab
 
-RAlt & o::
-    ShiftState := GetKeyState("Shift", "P")
-    If (ShiftState) {
-        Send, {Ö}
-    } Else {
-        Send, {ö}
-    }
-    return
-
-RAlt & 5::SendInput {Text}€
-
-RAlt & a::
-    ShiftState := GetKeyState("Shift", "P")
-    If (ShiftState) {
-        Send, {Ä}
-    } Else {
-        Send, {ä}
-    }
-    return
-
-
-RAlt & u::
-    ShiftState := GetKeyState("Shift", "P")
-    If (ShiftState) {
-        Send, {Ü}
-    } Else {
-        Send, {ü}
-    }
-    return
-
-RAlt & s::Send {ß}
 
 #c::PostMessage, 0x112, 0xF060,,, A
 
 RAlt & c::Send {Control Down}{Insert}{Control Up}
 RAlt & v::Send {Shift Down}{Insert}{Shift Up}
 
-#q::WinGetClass, Clipboard, A
 
-;eclipse 
+;eclipse
 #IfWinActive, ahk_class SWT_Window0
-	Capslock & s::^PgUp
-	Capslock & g::^PgDn
+	Capslock & s::Send {Control Down}{PgUp}{Control Up}
+	Capslock & g::Send {Control Down}{PgDn}{Control Up}
 
 	Capslock & w::^w
 	Capslock & e::^e
@@ -145,66 +122,57 @@ RAlt & v::Send {Shift Down}{Insert}{Shift Up}
 	Capslock & c::!^h
 	Capslock & x::^1
 	Capslock & Space::^Space
-	
-	;this also requires a remapping in the NVIM config such as nnoremap <A-1> 1gt
-	^1::vimToTab(1)
-	^2::vimToTab(2)
-	^3::vimToTab(3)
-	^4::vimToTab(4)
-	^5::vimToTab(5)
-	^6::vimToTab(6)
-	^7::vimToTab(7)
-	^8::vimToTab(8)
-	^9::vimToTab(9)
-	^0::vimToTab(0)
-
-#IfWinActive, .* - NVIM
-	Capslock & s::^PgUp
-	Capslock & g::^PgDn
-	
-	;this also requires a remapping in the NVIM config such as nnoremap <A-1> 1gt
-	^1::vimToTab(1)
-	^2::vimToTab(2)
-	^3::vimToTab(3)
-	^4::vimToTab(4)
-	^5::vimToTab(5)
-	^6::vimToTab(6)
-	^7::vimToTab(7)
-	^8::vimToTab(8)
-	^9::vimToTab(9)
-	^0::vimToTab(0)
-	
-	
-
-vimToTab(tabNumber){
-	send {Alt Down}
-	send % tabNumber
-	send {Alt Up}
-}
-
-#IfWinActive, ahk_class SWT_Window0
-    Capslock & v::
-#IfWinActive, ahk_class #32770
-    Capslock & v::
-        if(!GetKeyState("LControl"))
-            Send {LControl Down}
-        if(GetKeyState("LShift"))
-            Send {LShift Up}
-        Send {F7}
-        SetTimer, WaitForCapslockUp, 100
-        return
 #IfWinActive
 
-WaitForCapslockUp:
-    if(!GetKeyState("Capslock", "P")){
-        Send {LControl Up}
-        Send {LShift Up}
-        SetTimer, WaitForCapslockUp, Off
-    }
-    return
+	
+#IfWinActive, ahk_class CASCADIA_HOSTING_WINDOW_CLASS
+	Capslock & s::Send {Control Down}{PgUp}{Control Up}
+	Capslock & g::Send {Control Down}{PgDn}{Control Up}
 
-Capslock & s::^+Tab
-Capslock & g::^Tab
+	Capslock & w::^w
+	Capslock & e::^e
+	Capslock & r::+^r
+	Capslock & t::+^t
+	Capslock & c::!^h
+	Capslock & x::^1
+	Capslock & Space::^Space
+
+	;this also requires a remapping in the NVIM config such as nnoremap <A-1> 1gt
+	^1::send !{1}
+	^2::send !{2}
+	^3::send !{3}
+	^4::send !{4}
+	^5::send !{5}
+	^6::send !{6}
+	^7::send !{7}
+	^8::send !{8}
+	^9::send !{9}
+	^0::send !{10}
+#IfWinActive
+	
+;#IfWinActive, ahk_class SWT_Window0
+;    Capslock & v::
+;#IfWinActive, ahk_class #32770
+;    Capslock & v::
+;        if(!GetKeyState("LControl"))
+;            Send {LControl Down}
+;        if(GetKeyState("LShift"))
+;            Send {LShift Up}
+;        Send {F7}
+;        SetTimer, WaitForCapslockUp, 100
+;        return
+;#IfWinActive
+
+;WaitForCapslockUp:
+;    if(!GetKeyState("Capslock", "P")){
+;        Send {LControl Up}
+;        Send {LShift Up}
+;        SetTimer, WaitForCapslockUp, Off
+;    }
+;    return
+
+Capslock & s::Send {Control Down}{Shift Down}{Tab}{Shift Up}{Control Up}
+Capslock & g::Send {Control Down}{Tab}{Control Up}
 
 
 
@@ -238,3 +206,36 @@ else {
 }
 SetTitleMatchMode, 1
 return
+
+;remapping to make some plover commands work in WSL
+>^h::Send ^{left}
+>^j::send {PgDn}
+>^k::Send {PgUp}
+>^l::send ^{right}
+>^s::send {Home}
+>^d::send ^{Home}
+>^f::send ^{End}
+>^g::Send {End}
+
+>^F1::Send {F1}
+>^F5::Send {F5}
++>^F1::Send +{F1}
+!>^F1::Send ^{F1}
+	
+	
+
+;RAlt & q::
+;CtrlKeyDown := !CtrlKeyDown
+;If CtrlKeyDown
+;	Send {Ctrl down}
+;Else
+;	Send {Ctrl up}
+;Return
+
+;RAlt & w::
+;ShiftKeyDown := !ShiftKeyDown
+;If ShiftKeyDown
+;	Send {Shift down}
+;Else
+;	Send {Shift up}
+;Return
