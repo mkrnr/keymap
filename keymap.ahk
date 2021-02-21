@@ -20,7 +20,6 @@ Capslock & y::Run C:\Windows\System32\DisplaySwitch.exe
 #y::Run C:\git\dotfiles\windows\plover\reconnect.ahk
 #z::Run C:\git\dotfiles\windows\plover\stenojig-focus.ahk
 
-
 #e::Run explorer.exe
 #Enter::Run, %LOCALAPPDATA%\Microsoft\WindowsApps\wt.exe, C:\source\windows-terminal\home
 
@@ -35,7 +34,7 @@ Capslock & y::Run C:\Windows\System32\DisplaySwitch.exe
 	Send s
 	Sleep, 500
 	Run C:\git\dotfiles\windows\plover\stenojig-focus.ahk
-	Run python C:\git\stenoscores\stenoscores\score_writer.py C:\data\Dropbox\personal\stenography\progress\stats
+	Run python C:\git\stenoscores\stenoscores\score_writer.py C:\Users\mkoerner\iCloudDrive\Personal\stenography\progress\stats
 	return
 
 #s::Run, launcher.exe, C:\source\launcher, Hide
@@ -239,3 +238,40 @@ return
 ;Else
 ;	Send {Shift up}
 ;Return
+
+ShowMessage(message)
+{
+    Gui, -Caption +AlwaysOnTop +Disabled -SysMenu +Owner  ; +Owner avoids a taskbar button.
+	Gui, Font, s20,
+	Gui, Add, Text, , %message%
+	Gui, Show, x50 y50, NoActivate ; NoActivate avoids deactivating the currently active window.
+	return
+}
+
+SendUp()
+{
+	Send {LShift Up}
+	Send {LCtrl Up}
+	Gui, Destroy
+	return
+}
+
+
+!w::
+	Send {LShift Down}
+	ShowMessage("Shift on")
+	return
+
+<+!w::
+	SendUp()
+	return	
+	
+!q::
+	Send {LCtrl Down}
+	ShowMessage("Ctrl on")
+	return
+
+<^!q::
+	SendUp()
+	return
+
