@@ -16,12 +16,12 @@ Capslock & z::Tab
 
 Capslock & y::Run C:\Windows\System32\DisplaySwitch.exe
 
-
-#y::
+#+y::
     Runwait C:\Windows\System32\wsl.exe python3 ~/git/stenodicts/upload_to_website.py ~/git/stenodicts/
 	Run C:\git\dotfiles\windows\plover\reconnect.ahk
 	return
 	
+#y::Run C:\git\dotfiles\windows\plover\reconnect.ahk
 #z::Run C:\git\dotfiles\windows\plover\stenojig-focus.ahk
 
 #e::Run explorer.exe
