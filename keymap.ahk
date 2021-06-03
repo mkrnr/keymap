@@ -197,18 +197,19 @@ else {
 return
 
 #t::
-IfWinExist, %winTitlePart%
+If WinExist("- OneNote ahk_class Framework::CFrame", "OneNote")
 {
-        IfWinNotActive, %winTitlePart%
-                WinActivate, %winTitlePart%
+    IfWinNotActive, %winTitlePart%
+        WinActivate, %winTitlePart%
 }
 else {
     IfWinNotActive, %winTitlePart%
         Run, "C:\Program Files (x86)\Microsoft Office\root\Office16\ONENOTE.EXE"
 
 }
-SetTitleMatchMode, 1
 return
+
+SetTitleMatchMode, 1
 
 ;remapping to make some plover commands work in WSL
 >^h::Send ^{left}
@@ -225,57 +226,6 @@ return
 +>^F1::Send +{F1}
 !>^F1::Send ^{F1}
 	
-	
-
-;RAlt & q::
-;CtrlKeyDown := !CtrlKeyDown
-;If CtrlKeyDown
-;	Send {Ctrl down}
-;Else
-;	Send {Ctrl up}
-;Return
-
-;RAlt & w::
-;ShiftKeyDown := !ShiftKeyDown
-;If ShiftKeyDown
-;	Send {Shift down}
-;Else
-;	Send {Shift up}
-;Return
-
-ShowMessage(message)
-{
-    Gui, -Caption +AlwaysOnTop +Disabled -SysMenu +Owner  ; +Owner avoids a taskbar button.
-	Gui, Font, s20,
-	Gui, Add, Text, , %message%
-	Gui, Show, x50 y50, NoActivate ; NoActivate avoids deactivating the currently active window.
-	return
-}
-
-SendUp()
-{
-	Send {LShift Up}
-	Send {LCtrl Up}
-	Gui, Destroy
-	return
-}
 
 
-!w::
-	Send {LShift Down}
-	ShowMessage("Shift on")
-	return
-
-<+!w::
-	SendUp()
-	return	
-	
-!q::
-	Send {LCtrl Down}
-	ShowMessage("Ctrl on")
-	return
-
-<^!q::
-	SendUp()
-	return
 
